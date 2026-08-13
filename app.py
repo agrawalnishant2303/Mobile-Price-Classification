@@ -46,13 +46,13 @@ if file_uploaded is not None:
       X_test = test_csv.drop("price_range", axis=1)
       y_test = test_csv["price_range"]
 
-      X_test_scaled = joblib.load(os.path.join("models", "scaler.joblib")).transform(X_test)
+      X_test_scaled = joblib.load(os.path.join("model", "scaler.joblib")).transform(X_test)
 
       if user_choice == "All":
-        st.subheader("COmparing metrics of all models")
+        st.subheader("Comparing metrics of all models")
         results = []
         for model_name, model_file in file_mapping.items():
-          model = joblib.load(os.path.join("models", model_file))
+          model = joblib.load(os.path.join("model", model_file))
           y_pred = model.predict(X_test_scaled)
           y_pred_proba = model.predict_proba(X_test_scaled)
           accuracy = accuracy_score(y_test, y_pred)
@@ -78,7 +78,7 @@ if file_uploaded is not None:
             ax.annotate(f"{p.get_width():.4f}", (p.get_width() + 0.01, p.get_y() + 0.5))
           st.pyplot(fig)
       else:
-        model = joblib.load(os.path.join("models", file_mapping[user_choice]))
+        model = joblib.load(os.path.join("model", file_mapping[user_choice]))
         y_pred = model.predict(X_test_scaled)
         y_pred_proba = model.predict_proba(X_test_scaled)
         st.subheader(f"Metrics for {user_choice} model")
