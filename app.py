@@ -69,7 +69,7 @@ if file_uploaded is not None:
               "Accuracy": "{:.4f}", "AUC": "{:.4f}",
               "Precision": "{:.4f}", "Recall": "{:.4f}",
               "F1 Score": "{:.4f}", "MCC": "{:.4f}"
-          }), use_container_width=True)
+          }), width='stretch')
           st.write("Comparing accuracy for all the models")
           fig, ax = plt.subplots(figsize=(8, 4))
           sns.barplot(x="Accuracy", y="Model", data=results_df, ax=ax, palette="viridis")
